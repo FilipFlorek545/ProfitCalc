@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Display:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Bismuth Profit Calculator</title>
+</head>
+<style>
+    body{
+        background-color: #5C4033;
+        font-family: "Noto Sans", sans-serif;
+    }
+    input{
+        font-family: "Noto Sans", sans-serif;
+        border-radius: 5px;
+        margin: 5px 0;
+    }
+    img{
+        width: 20px;
+        margin-bottom: -3px;
+    }
+    button{
+        font-family: "Noto Sans", sans-serif;
+    }
+    #calcContainer{
+        margin: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 350px;
+        height: 500px;
+        gap: 20px;
+        border: 10px solid silver;
+        border-radius: 30px;
+        background-color: whitesmoke;
+    }
+    #calcContainer div{
+        display: flex;
+        flex-direction: column;
+    }
+    button{
+        padding: 10px 15px;
+        border: none;
+        background-color: #5C4033;
+        color: whitesmoke;
+        box-shadow: 4px 4px #3d291e;
+        transition: 0.2s;
+    }
+    button:active{
+        box-shadow: 1px 2px #3d291e;
+    }
+</style>
+<body>
+    <div id="calcContainer">
+        <div>
+            <label for="r2">Price <img src="tier2.png" alt="Tier 2">:</label>
+            <input id="r2" type="number">
+        </div>
+        <div>
+            <label for="r2"><img src="tier2.png" alt="Tier 2"> amount bought:</label>
+            <input id="amount" type="number">
+        </div>
+        <div>
+            <label for="r3">Price <img src="tier3.png" alt="Tier 3">:</label>
+            <input id="r3" type="number">
+        </div>
+            <button id="calc">Calculate profits</button>
+        <div id="profit">&nbsp;</div>
+        <div id="timeInMinutes">&nbsp;</div>
+    </div>
+<script>
+
+
+    const returnCalculations = () => {
+        let priceR2 = document.getElementById("r2").value;
+        let priceR3 = document.getElementById("r3").value;
+        let amountBought = document.getElementById("amount").value;
+
+        if(!priceR2 || !priceR3 || !amountBought){
+            alert('Fill the fields properly!')
+            return;
+        }
+
+        let profit = (priceR3 - (priceR2 * 5) * 0.95) * (amountBought / 5);
+        let time = (amountBought) / 60;
+
+        document.getElementById("profit").innerText = profit.toFixed(2).toString() + " gold to be earned";
+        document.getElementById("timeInMinutes").innerText = time.toFixed(0).toString() + " minutes crafting";
+    }
+    document.getElementById("calc").addEventListener("click", returnCalculations)
+</script>
+</body>
+</html>
